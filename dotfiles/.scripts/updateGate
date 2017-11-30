@@ -1,0 +1,5 @@
+ssh crilout@gate.lip6.fr 'rm -rf ~/MachineLearning/util/*'
+ssh crilout@gate.lip6.fr 'rm -rf ~/MachineLearning/main.py'
+scp -r  ~/MachineLearning/util/[!.]* crilout@gate.lip6.fr:~/MachineLearning/util/.
+scp -r ~/MachineLearning/main.py crilout@gate.lip6.fr:~/MachineLearning/main.py
+scp -r ~/MachineLearning/LogsUnow/p_util/. crilout@gate.lip6.fr:~/MachineLearning/LogsUnow/p_util/.

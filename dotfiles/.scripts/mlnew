@@ -1,0 +1,36 @@
+#!/bin/bash
+# File: .scripts/mlnew
+# Author: Mathieu Crilout <mathieucrilout@mail>
+# Date: 10.06.2017
+#
+# Create new machine learning project in ~/MachineLearning with canonical
+# arborescence.
+# 
+# Usage: ./mlnew projectName
+
+rootPath="$HOME/MachineLearning"
+
+if [ "$#" -ne 1 ]; then
+  echo "Bad number of args : $#\nUsage : mlnew projectName"
+  exit $ERRORCODE;
+fi
+if [ ! -d "$rootPath" ]; then
+  echo $rootPath
+  mkdir $rootPath
+fi
+
+mkdir "$rootPath/$1"
+mkdir "$rootPath/$1/data"
+mkdir "$rootPath/$1/data/raw_data"
+mkdir "$rootPath/$1/data/processed"
+mkdir "$rootPath/$1/ipy"
+mkdir "$rootPath/$1/ipy/img"
+cp "$rootPath/.tmp/datasetAnalysis.ipy" "$rootPath/$1/ipy/."
+cp "$rootPath/.tmp/datasetAnalysis.ipy" "$rootPath/$1/ipy/datasetTransformations.ipy"
+cp "$rootPath/.tmp/rawProcessing.ipy" "$rootPath/$1/ipy/."
+mkdir "$rootPath/$1/p_util"
+cp "$rootPath/.tmp/p_util/__init__.py" "$rootPath/$1/p_util/."
+cp "$rootPath/.tmp/p_util/local_transformations.py" "$rootPath/$1/p_util/."
+mkdir "$rootPath/$1/exp"
+mkdir "$rootPath/$1/models"
+mkdir "$rootPath/$1/papers"

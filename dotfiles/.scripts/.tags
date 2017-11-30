@@ -1,0 +1,5 @@
+csv_fn	/home/mcrilo33/.scripts/dbf2csv.py	/^    csv_fn = filename[:-4]+ ".csv"$/;"	v	language:Python
+filename	/home/mcrilo33/.scripts/dbf2csv.py	/^filename = sys.argv[1]$/;"	v	language:Python
+in_db	/home/mcrilo33/.scripts/dbf2csv.py	/^        in_db = dbf.Dbf(filename)$/;"	v	language:Python
+names	/home/mcrilo33/.scripts/dbf2csv.py	/^        names = []$/;"	v	language:Python
+out_csv	/home/mcrilo33/.scripts/dbf2csv.py	/^        out_csv = csv.writer(csvfile)$/;"	v	language:Python

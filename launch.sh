@@ -6,7 +6,8 @@
 # This installation process has been thought for Arch linux distro but some parts can be apllied to another OS.
 # pacaur
 sudo pacman -Syu
-sudo pacman -S pacaur
+sudo pacman -S pacaur git
+cp dotfiles/.gitconfig ~/.
 # linuxbrew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 ################################# VIM
@@ -71,6 +72,7 @@ git clone https://github.com/nelstrom/vim-visual-star-search ~/.vim/bundle/vim-v
 git clone https://github.com/maxbrunsfeld/vim-yankstack ~/.vim/bundle/vim-yankstack
 # vimrc
 cp dotfiles/.vimrc ~/.vimrc
+cp dotfiles/.shell_prompt.sh ~/.
 
 ######################### NEOVIM
 sudo pacman -S neovim;
@@ -88,6 +90,7 @@ sudo pacman -S python2 python3 jupyter-notebook ipython
 pacaur -S python-conda
 conda create -n python3 python=3.6 anaconda
 conda install pytorch torchvision -c soumith
+cp -R dotfiles/.ipython/profile_default ~/.ipython/.
 
 ######################### ZSH
 sudo pacman -S autojump
@@ -108,7 +111,7 @@ cp dotfiles/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 cp dotfiles/.ssh/known_hosts ~/.ssh/known_hosts
 
 ######################### Various
-sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium git pulseaudio xfce4-pulseaudio-plugin
+sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin
 pacaur -S franz
 cp dotfiles/.ignore ~/.ignore
 
