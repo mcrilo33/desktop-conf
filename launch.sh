@@ -1,12 +1,26 @@
 #!/bin/bash
-# File: launch.sh
+# File              : launch.sh
+# Author            : Mathieu Crilout <mathieucrilout@mail>
+# Date              : 01.12.2017
+# Last Modified Date: 05.12.2017
+# Last Modified By  : Mathieu Crilout <mathieucrilout@mail>
+# File              : launch.sh
 # Author: Mathieu Crilout <mathieucrilout@mail>
 # Date: 30.11.2017
 
 # This installation process has been thought for Arch linux distro but some parts can be apllied to another OS.
 # pacaur
-sudo pacman -Syu
-sudo pacman -S pacaur git
+sudo pacman -Syu --noconfirm
+sudo pacman -S expac yajl --noconfirm
+mkdir tmp
+cd tmp
+gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
+curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
+makepkg -i PKGBUILD --noconfirm
+curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=pacaur
+makepkg -i PKGBUILD --noconfirm
+cd ..
+rm -r tmp
 cp dotfiles/.gitconfig ~/.
 # linuxbrew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
@@ -49,9 +63,9 @@ git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/bundle/vim-ai
 git clone https://github.com/gioele/vim-autoswap ~/.vim/bundle/vim-autoswap
 git clone https://github.com/jeetsukumaran/vim-buffergator ~/.vim/bundle/vim-buffergator
 git clone https://github.com/julienr/vim-cellmode ~/.vim/bundle/vim-cellmode
-git clone https://github.com/mutewinter/vim-css3-syntax ~/.vim/bundle/vim-css3-syntax
+git clone https://github.com/hail2u/vim-css3-syntax ~/.vim/bundle/vim-css3-syntax
 git clone https://github.com/ap/vim-css-color ~/.vim/bundle/vim-css-color
-pacaur -S nerd-fonts-complete # vim-devicons mandatory
+pacaur -S nerd-fonts-complete --noconfirm # vim-devicons mandatory
 git clone https://github.com/ryanoasis/vim-devicons ~/.vim/bundle/vim-devicons
 git clone https://github.com/airblade/vim-gitgutter ~/.vim/bundle/vim-gitgutter
 git clone https://github.com/alpertuna/vim-header ~/.vim/bundle/vim-header
@@ -62,7 +76,7 @@ git clone https://github.com/mxw/vim-jsx ~/.vim/bundle/vim-jsx
 git clone https://github.com/tpope/vim-obsession ~/.vim/bundle/vim-obsession
 git clone https://github.com/hynek/vim-python-pep8-indent ~/.vim/bundle/vim-python-pep8-indent
 git clone https://github.com/kana/vim-repeat ~/.vim/bundle/vim-repeat
-git clone https://github.com/fab-du/vim-sensible ~/.vim/bundle/vim-sensible
+git clone https://github.com/tpope/vim-sensible ~/.vim/bundle/vim-sensible
 git clone https://github.com/anyakichi/vim-surround ~/.vim/bundle/vim-surround
 git clone https://github.com/christoomey/vim-tmux-navigator ~/.vim/bundle/vim-tmux-navigator
 git clone https://github.com/tmux-plugins/vim-tmux ~/.vim/bundle/vim-tmux
@@ -75,63 +89,75 @@ cp dotfiles/.vimrc ~/.vimrc
 cp dotfiles/.shell_prompt.sh ~/.
 
 ######################### NEOVIM
-sudo pacman -S neovim;
+sudo pacman -S neovim --noconfirm
+mkdir ~/.config/nvim
 echo "    set runtimepath^=~/.vim runtimepath+=~/.vim/after
     let &packpath = &runtimepath
     source ~/.vimrc" > ~/.config/nvim/init.vim
 
 ######################### TERMITE
-sudo pacman -S termite
-cp dotfiles/.config/termite/config ~/.config/termite/config
+sudo pacman -S termite --noconfirm
+cd dotfiles
+cp --parents .config/termite/config ~/.
+cd ..
+pacaur -S adobe-source-code-pro-fonts --noconfirm
 echo "Choose termite as default terminal console."
 
 ######################### CONDA
-sudo pacman -S python2 python3 jupyter-notebook ipython
-pacaur -S python-conda
+sudo pacman -S python2 python3 jupyter-notebook ipython --noconfirm
+pacaur -S python-conda --noconfirm
 conda create -n python3 python=3.6 anaconda
 conda install pytorch torchvision -c soumith
-cp -R dotfiles/.ipython/profile_default ~/.ipython/.
+cd dotfiles
+cp --parents -R .conda/envs/python3/lib/python3.6/site-packages/pygments/styles/solarized.py ~/.
+cd ..
 
 ######################### ZSH
-sudo pacman -S autojump
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" # oh-my-zsh
+sudo pacman -S zsh --noconfirm
+sudo chsh -s $(which zsh)
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 cp dotfiles/.zshrc ~/.
 
 ######################### TMUX
-sudo pacman -S tmux
+sudo pacman -S tmux --noconfirm
 cp dotfiles/.tmuxline-colors.conf
 cp dotfiles/.tmux.conf
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ######################### SSH
-sudo pacman -S openssh
+sudo pacman -S openssh --noconfirm
 mkkir ~/.ssh
 cp dotfiles/.ssh/id_rsa ~/.ssh/id_rsa
 cp dotfiles/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 cp dotfiles/.ssh/known_hosts ~/.ssh/known_hosts
 
 ######################### Various
-sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin
-pacaur -S franz
+sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro --noconfirm
+sudo pacman -S autojump --noconfirm
+pacaur -S franz --noconfirm
 cp dotfiles/.ignore ~/.ignore
+pip install --user neovim # for neovim but needed to be after CONDA
 
 ######################### Internet
-sudo pacman -S networkmanager network-manager-applet
+sudo pacman -S networkmanager network-manager-applet --noconfirm
 
 ######################## Appearance
 echo "APPEARANCE SETTINGS"
-pacaur -S arc-gtk-theme
+pacaur -S arc-gtk-theme --noconfirm
 echo "Style -> Arc"
-pacaur -S papirus-icon-theme-git
+pacaur -S papirus-icon-theme-git --noconfirm
 echo "Icons -> Papirus-Light"
-pacaur -S otf-ibm-plex
+pacaur -S otf-ibm-plex --noconfirm
 echo "Fonts -> IBM Plex Sans Text 10"
 echo "DESKTOP"
 echo "Change the background at startup [Random Order]\nand copy google-map-wallpapers to /usr/shar/backgrounds/xfce"
 echo "KEYBOARD"
 echo "Change layout to English (programmer Dvorak)"
+echo "Set shortcuts for Termite, Chromium, Thunar, Calibre"
 echo "PANEL"
 echo "Mode: Horizontal\nLock panel [Checked]\nAutomatically hide the panel: Always\nRow Size:24\nNumber of rows:1\nLength:100\nStyle:Solid color\nAlpha:84\nColor:#000\nOpacity:100\nItems:Applications Menu>WindowButtons>Separator>Workspace Switcher>Clock>Notification Area>Action Buttons>PulseAudioPlugin"
+echo "SESSION AND STARTUP"
+echo "/usr/bin/redshift -l 48.856614:2.352222
 echo "PREFERED APPLICATIONS"
 echo "Chromium,Thunar,Termite"
 echo "WINDOW MANAGER"
