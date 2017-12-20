@@ -1,10 +1,10 @@
 #!/bin/bash
-# File              : launch.sh
+# File              : desktop-conf/launch.sh
 # Author            : Mathieu Crilout <mathieucrilout@mail>
 # Date              : 01.12.2017
-# Last Modified Date: 06.12.2017
+# Last Modified Date: 20.12.2017
 # Last Modified By  : Mathieu Crilout <mathieucrilout@mail>
-# File              : launch.sh
+# File              : desktop-conf/launch.sh
 # Author: Mathieu Crilout <mathieucrilout@mail>
 # Date: 30.11.2017
 
@@ -134,7 +134,7 @@ cp dotfiles/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 cp dotfiles/.ssh/known_hosts ~/.ssh/known_hosts
 
 ######################### Various
-sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro --noconfirm
+sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro ntfs-3g --noconfirm
 sudo pacman -S autojump --noconfirm
 pacaur -S franz --noconfirm
 cp dotfiles/.ignore ~/.ignore
