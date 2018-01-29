@@ -134,7 +134,7 @@ cp dotfiles/.ssh/known_hosts ~/.ssh/known_hosts
 ######################### Various
 sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro --noconfirm
 sudo pacman -S thunar-archive-plugin file-roller --noconfirm
-sudo pacman -S autojump --noconfirm
+sudo pacman -S autojump ctags --noconfirm
 pacaur -S franz --noconfirm
 cp dotfiles/.ignore ~/.ignore
 pip install --user neovim # for neovim but needed to be after CONDA
