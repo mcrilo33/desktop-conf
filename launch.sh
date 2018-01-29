@@ -1,10 +1,10 @@
 #!/bin/bash
-# File              : launch.sh
+# File              : desktop-conf/launch.sh
 # Author            : Mathieu Crilout <mathieucrilout@mail>
 # Date              : 01.12.2017
-# Last Modified Date: 05.12.2017
+# Last Modified Date: 20.12.2017
 # Last Modified By  : Mathieu Crilout <mathieucrilout@mail>
-# File              : launch.sh
+# File              : desktop-conf/launch.sh
 # Author: Mathieu Crilout <mathieucrilout@mail>
 # Date: 30.11.2017
 
@@ -94,6 +94,7 @@ mkdir ~/.config/nvim
 echo "    set runtimepath^=~/.vim runtimepath+=~/.vim/after
     let &packpath = &runtimepath
     source ~/.vimrc" > ~/.config/nvim/init.vim
+wait 5
 
 ######################### TERMITE
 sudo pacman -S termite --noconfirm
@@ -102,6 +103,7 @@ cp --parents .config/termite/config ~/.
 cd ..
 pacaur -S adobe-source-code-pro-fonts --noconfirm
 echo "Choose termite as default terminal console."
+wait 5
 
 ######################### CONDA
 sudo pacman -S python2 python3 jupyter-notebook ipython --noconfirm
@@ -126,13 +128,13 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ######################### SSH
 sudo pacman -S openssh --noconfirm
-mkkir ~/.ssh
+mkdir ~/.ssh
 cp dotfiles/.ssh/id_rsa ~/.ssh/id_rsa
 cp dotfiles/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 cp dotfiles/.ssh/known_hosts ~/.ssh/known_hosts
 
 ######################### Various
-sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro --noconfirm
+sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro ntfs-3g --noconfirm
 sudo pacman -S thunar-archive-plugin file-roller --noconfirm
 sudo pacman -S autojump ctags --noconfirm
 pacaur -S franz --noconfirm
@@ -163,6 +165,8 @@ echo "PREFERED APPLICATIONS"
 echo "Chromium,Thunar,Termite"
 echo "WINDOW MANAGER"
 echo "Style:Arc\n\nKeyboard:Up>K,Down>J,Left>H,Right>L\nClose window>Shift+Ctrl+w\nMaximize window>Alt+m\nMove window to left workspace>Shift+Alt+A\nMove window to right workspace>Shift+Alt+S\nTile window to the top>Alt+K\nTile window to the bottom>Alt+J\nTile window to the left>Alt+H\nTile window to the right>Alt+L\nTile window to the top-left>Shift+Alt+K\nTile window to the top-right>Shift+Alt+L\nTile window to the bottom-left>Shift+Alt+H\nTile window to the bottom-right>Alt+J\nLeft workspace>Alt+A\nRight workspace>Alt+S"
+wait 5
 
-
-
+tmux
+tmux source ~/.tmux.conf
+echo "Press prefix + I to fetch tmux plugins"
