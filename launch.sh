@@ -1,10 +1,10 @@
 #!/bin/bash
-# File              : desktop-conf/launch.sh
+# File              : launch.sh
 # Author            : Mathieu Crilout <mathieucrilout@mail>
 # Date              : 01.12.2017
-# Last Modified Date: 20.12.2017
+# Last Modified Date: 30.01.2018
 # Last Modified By  : Mathieu Crilout <mathieucrilout@mail>
-# File              : desktop-conf/launch.sh
+# File              : launch.sh
 # Author: Mathieu Crilout <mathieucrilout@mail>
 # Date: 30.11.2017
 
@@ -109,6 +109,7 @@ wait 5
 sudo pacman -S python2 python3 jupyter-notebook ipython --noconfirm
 pacaur -S python-conda --noconfirm
 conda create -n python3 python=3.6 anaconda
+conda create -n python2 python=2.7 anaconda
 conda install pytorch torchvision -c soumith
 cd dotfiles
 cp --parents -R .conda/envs/python3/lib/python3.6/site-packages/pygments/styles/solarized.py ~/.
