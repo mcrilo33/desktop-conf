@@ -142,6 +142,9 @@ pacaur -S franz --noconfirm
 cp dotfiles/.ignore ~/.ignore
 pip install --user neovim # for neovim but needed to be after CONDA
 
+pip install jupyterthemes
+jt -t solarizedl -cellw 1200
+
 ######################### Internet
 sudo pacman -S networkmanager network-manager-applet --noconfirm
 
