@@ -135,7 +135,7 @@ cp dotfiles/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 cp dotfiles/.ssh/known_hosts ~/.ssh/known_hosts
 
 ######################### Various
-sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro ntfs-3g --noconfirm
+sudo pacman -S libreoffice okular transmission vlc calibre deadbeef chromium pulseaudio xfce4-pulseaudio-plugin redshift gvfs alsa-utils klavaro ntfs-3g xfce4-screenshooter --noconfirm
 sudo pacman -S thunar-archive-plugin file-roller --noconfirm
 sudo pacman -S autojump ctags --noconfirm
 pacaur -S franz --noconfirm
@@ -144,6 +144,7 @@ pip install --user neovim # for neovim but needed to be after CONDA
 
 pip install jupyterthemes
 jt -t solarizedl -cellw 1200
+sudo pacman -S texlive-most --noconfirm # for latex compilation
 
 ######################### Internet
 sudo pacman -S networkmanager network-manager-applet --noconfirm
