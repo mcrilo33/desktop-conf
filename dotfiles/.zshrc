@@ -1,15 +1,25 @@
+#!/bin/zsh
+# File              : dotfiles/.zshrc
+# Author            : Mathieu Crilout <mathieucrilout@mail>
+# Date              : 06.08.2018
+# Last Modified Date: 06.08.2018
+# Last Modified By  : Mathieu Crilout <mathieucrilout@mail>
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+xrandr --output DVI-D-0 --left-of DVI-I-1
+
 # Export
 export EDITOR="nvim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-# added by Miniconda3 installer
-export PATH="/home/mcrilo33/.miniconda3/bin:$PATH"
+# added by Anaconda3 installer
+#export PATH="/home/crilout/.anaconda3/bin:$PATH"
 
 # Brew
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+#export PATH="$HOME/.linuxbrew/bin:$PATH"
+#export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+#export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 # Tmux Options
 ZSH_TMUX_AUTOSTART=true
@@ -32,14 +42,10 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # Autojump
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-
-# added by Anaconda3 4.2.0 installer
-export PATH="/home/mcrilo33/.anaconda3/bin:$PATH"
-source activate python3
+#[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d#/autojump.sh
 
 # Path to your oh-my-zsh installation.
-export ZSH=/usr/share/oh-my-zsh/
+export ZSH=/home/crilout/local/usr/share/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -130,3 +136,23 @@ export PATH="$HOME/.node_modules_global/bin:$PATH"
 alias sn='sudo -E nvim'
 alias scp='sudo cp'
 alias smv='sudo mv'
+
+[[ -s /home/crilout/.autojump/etc/profile.d/autojump.sh ]] && source /home/crilout/.autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u
+
+xrandr --output DVI-D-0 --left-of DVI-I-1
+
+#source activate python3
+export CONDA_EXE=/local/crilout/.miniconda3/bin
+export PATH=$CONDA_EXE:$PATH
+export _CONDA_EXE=/local/crilout/.miniconda3/bin/conda
+alias py36=/local/crilout/.miniconda3/envs/py3/bin/python
+alias pip36=/local/crilout/.miniconda3/envs/py3/bin/pip
+alias py27=/local/crilout/.miniconda3/envs/py2/bin/python
+alias pip27=/local/crilout/.miniconda3/envs/py2/bin/pip
+alias ipy36=/local/crilout/.miniconda3/envs/py3/bin/ipython
+source activate py3
+VIRTUAL_ENV='/local/crilout/.miniconda3'
+
+alias rkeys='setxkbmap -layout us -variant dvp -option compose:102 -option keypad:atm -option numpad:shift3 -option kpdl:semi'

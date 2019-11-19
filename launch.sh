@@ -175,3 +175,4 @@ wait 5
 tmux
 tmux source ~/.tmux.conf
 echo "Press prefix + I to fetch tmux plugins"
+cp -Rf dotfiles/.i3 ~/.config/i3

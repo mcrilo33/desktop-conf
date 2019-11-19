@@ -38,6 +38,8 @@ set shiftwidth=4
 set cursorline
 set encoding=utf8
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+
+set hidden
 " }}}
 
 " Remapping -------------------- {{{
@@ -56,6 +58,15 @@ nnoremap <leader>{ <C-o>
 nnoremap <leader>} <C-i>
 inoremap <c-l> <right>
 inoremap <c-h> <left>
+nnoremap w W
+nnoremap b B
+nnoremap e E
+nnoremap W w
+nnoremap B b
+nnoremap E e
+nnoremap gE ge
+nnoremap J :bprevious!<CR>
+nnoremap K :bnext!<CR>
 " }}}
 
 " Command line movement remapping -------------------- {{{
@@ -150,6 +161,7 @@ let g:rbpt_colorpairs = [
     \ ['red',         'firebrick3'],
     \ ]
 au VimEnter * RainbowParenthesesToggle
+"au BufEnter * RainbowParenthesesActivate
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
@@ -224,8 +236,10 @@ if (has("termguicolors"))
     set termguicolors
     colorscheme solarized8_dark
 else
+    let g:solarized_termcolors=256
     colorscheme solarized
 endif
+"colorscheme flattened_light
 
 
 " }}}
@@ -271,20 +285,20 @@ set statusline+=%*
 
 autocmd! BufWritePost,BufEnter * Neomake
 let g:airline#extensions#neomake#enabled = 1
-let g:neomake_python_pylint_maker = {
-  \ 'args': [
-  \ '-d', 'C0111, C0103, W0611, R0914, E0611, E0401',
-  \ '-f', 'text',
-  \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
-  \ '-r', 'n'
-  \ ],
-  \ 'errorformat':
-  \ '%A%f:%l:%c:%t: %m,' .
-  \ '%A%f:%l: %m,' .
-  \ '%A%f:(%l): %m,' .
-  \ '%-Z%p^%.%#,' .
-  \ '%-G%.%#',
-  \ }
+"let g:neomake_python_pylint_maker = {
+  "\ 'args': [
+  "\ '-d', 'C0111, C0103, W0611, R0914, E0611, E0401',
+  "\ '-f', 'text',
+  "\ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
+  "\ '-r', 'n'
+  "\ ],
+  "\ 'errorformat':
+  "\ '%A%f:%l:%c:%t: %m,' .
+  "\ '%A%f:%l: %m,' .
+  "\ '%A%f:(%l): %m,' .
+  "\ '%-Z%p^%.%#,' .
+  "\ '%-G%.%#',
+  "\ }
 let g:neomake_python_enabled_makers = ['pylint']
 
 let g:neomake_javascript_jshint_maker = {
@@ -308,6 +322,7 @@ let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 " }}}
 
 " Git version with GitGutter -------------------- {{{
+let g:gitgutter_terminal_reports_focus=0
 let g:gitgutter_enabled=1
 let g:gitgutter_max_signs=500
 set updatetime=250
@@ -340,8 +355,8 @@ let g:ctrlp_custom_ignore = {
   \ 'link': '',
   \ 
   \ }
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind <leader>* to grep word under cursor
+nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " bind <leader>a to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -495,6 +510,22 @@ noremap <silent> <C-g> :call RunTmuxPythonCell(1)<CR>
 let g:cellmode_tmux_sessionname=''
 let g:cellmode_tmux_windowname=''
 let g:cellmode_tmux_panenumber='2'
+" }}}
+
+" python-mode -------------------- {{{
+let g:pymode_python = 'python3'
+let g:pymode_virtualenv_path = '/local/crilout/.miniconda3'
+let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # XXX BREAKPOINT'
+let g:pymode_doc_bind = '<leader>d'
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 0
+let g:pymode_rope_completion_on_dot = 0
+let g:pymode_rope_goto_definition_cmd = 'e'
+let g:pymode_rope_extract_variable_bind = '<C-c>rw'
+let g:pymode_syntax_slow_sync = 1
+let g:pymode_syntax_all = 1
+let g:pymode_lint_ignore = ["E0001"]
+let g:pymode_lint_cwindow = 0
 " }}}
 
 " }}}
