@@ -10,4 +10,5 @@ This repository is for desktop configuration. It contains all my dotfiles.
 
 Here you can see how it looks when you have termite/neovim with all bundles/tmux well configured.
 Enjoy ! :)
+
 ![Alt text](presentation.gif)
