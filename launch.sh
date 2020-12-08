@@ -84,6 +84,7 @@ git clone https://github.com/tpope/vim-unimpaired ~/.vim/bundle/vim-unimpaired
 git clone https://github.com/benmills/vimux ~/.vim/bundle/vimux
 git clone https://github.com/nelstrom/vim-visual-star-search ~/.vim/bundle/vim-visual-star-search
 git clone https://github.com/maxbrunsfeld/vim-yankstack ~/.vim/bundle/vim-yankstack
+git clone https://github.com/codota/tabnine-vim.git
 # vimrc
 cp dotfiles/.vimrc ~/.vimrc
 cp dotfiles/.shell_prompt.sh ~/.
