@@ -1,13 +1,22 @@
-" File: .vimrc
-" Author: Mathieu Crilout <mathieucrilout@mail>
+" File              : .vimrc
+" Author            : Mathieu Crilout <mathieucrilout@mail>
+" Date              : 09.11.2020
+" Last Modified Date: 01.12.2020
+" Last Modified By  : Mathieu Crilout <mathieucrilout@mail>
+" File              : .vimrc
+" Author            : Mathieu Crilout <mathieucrilout@mail>
 " Date: 09.06.2017
 
 " Basic Config -------------------- {{{
 
+" TabNine -------------------- {{{
+TabNine::sem
+" }}}
+
 " Deoplete -------------------- {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_refresh_always = 1 "It increases the screen flicker.
+"let g:deoplete#enable_refresh_always = 1 "It increases the screen flicker.
 let g:deoplete#sources#jedi#enable_cach = 1
 let g:deoplete#sources#jedi#show_docstring = 1
 " let g:deoplete#disable_auto_complete = 1
@@ -234,7 +243,8 @@ if (has("termguicolors"))
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
-    colorscheme solarized8_dark
+    set background=dark
+    colorscheme solarized8
 else
     let g:solarized_termcolors=256
     colorscheme solarized
@@ -282,6 +292,8 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 set statusline=%#warningmsg#
 set statusline+=\ %#ErrorMsg#%{neomake#statusline#QflistStatus('qf:\ ')}
 set statusline+=%*
+
+au BufRead,BufNewFile *.ipy set filetype=python
 
 autocmd! BufWritePost,BufEnter * Neomake
 let g:airline#extensions#neomake#enabled = 1
@@ -428,7 +440,7 @@ let g:neotags_ctags_args = [
             \ '--c-kinds=+p',
             \ '--c++-kinds=+p',
             \ '--sort=yes',
-            \ '--extra=+q'
+            \ '--extras=+q'
             \ ]
 let g:neotags_run_ctags = 1
 let g:neotags_highlight = 1
@@ -513,8 +525,9 @@ let g:cellmode_tmux_panenumber='2'
 " }}}
 
 " python-mode -------------------- {{{
+let g:python3_host_prog='/Users/mcrilo33/miniconda3/bin/python'
 let g:pymode_python = 'python3'
-let g:pymode_virtualenv_path = '/local/crilout/.miniconda3'
+let g:pymode_virtualenv_path = '~/miniconda3'
 let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # XXX BREAKPOINT'
 let g:pymode_doc_bind = '<leader>d'
 let g:pymode_rope = 0
@@ -578,12 +591,8 @@ augroup END
 " Header -------------------- {{{
 let g:header_field_author = 'Mathieu Crilout'
 let g:header_field_author_email = 'mathieucrilout@mail'
-map <F4> :AddHeader<CR>
-if filereadable(expand('%'))
-    " BufRead
-else
-    call feedkeys("\<F4>")
-endif
+let g:header_auto_add_header = 0
+map <F4> :AddMinHeader<CR>
 
 let file_name = expand('%:t')
 if filereadable(file_name) && empty(matchstr(readfile(file_name),'.'))
